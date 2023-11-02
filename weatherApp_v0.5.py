@@ -18,6 +18,17 @@ class WeatherWin(QMainWindow, form_class):
         self.setWindowIcon(QIcon("img/weather_icon.png"))
         self.statusBar().showMessage("Weather Application Ver0.5")
 
+        self.weather_btn.clicked.connect(self.request_weather)
+
+    def request_weather(self):
+        area = self.input_areaBox.text() # 사용자가 입력한 지역이름을 가져오기
+        weather_html = requests.get(f'https://search.naver.com/search.naver?&query={area}날씨')
+        weather_soup = BeautifulSoup(weather_html.text, 'html.parser')
+
+        area_text = weather_soup.find('h2', {'class': 'title'}).text
+        # 날씨를 조회하려는 지역주소 가져오기
+        self.area_label.setText(area_text) # area_label 레이블 자리에 area_text를 출력
+
 
 
 if __name__== '__main__':
