@@ -5,11 +5,11 @@ import requests
 
 from bs4 import BeautifulSoup
 
-# area = "한남동"
-area = input("날씨를 알고 싶은 지역을 입력하세요:")
+area = "한남동"
+# area = input("날씨를 알고 싶은 지역을 입력하세요:")
 
 weather_html = requests.get(f'https://search.naver.com/search.naver?&query={area}날씨')
-# print(weather_html.text)
+print(weather_html.text)
 
 weather_soup = BeautifulSoup(weather_html.text, 'html.parser')
 
@@ -28,10 +28,10 @@ yesterday_weathertext = yesterday_weathertext[:13].strip()
 # 총 13글자를 가져온 후 strip으로 양쪽의 공백제거 후 저장
 print(f"* {yesterday_weathertext}")
 
-# sense_temperature = weather_soup.select('dl.summary_list>dd')
-# # <dl> 중에서 class가 summry_list 인 태그를 찾은 후 그 안의 <dd>태그들을 모두 리스트로 반환
-# sense_temperature_text = sense_temperature[0].text
-# print(sense_temperature_text)
+sense_temperature = weather_soup.find('div',{'class':'weather_info'}).find('dl',{'class':'summary_list'}).find('dd',{'class':'desc'}).text
+# <div> 태그 중 클래스가 weather_info 인 div 태그 안에 있는 dl 태그 중 클래스가 summary_list인 dl을 찾음
+# dl 태그 안에 있는 dd 태그 중 클래스가 desc 인 태그를 찾아 텍스트 값을 반환 
+print(f"* 체감온도 : {sense_temperature}")
 
 dust_info = weather_soup.select('ul.today_chart_list>li')
 # print(dust_info)
