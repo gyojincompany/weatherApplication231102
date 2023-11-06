@@ -83,14 +83,14 @@
    <widget class="QLabel" name="weather_imageLabel">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>60</x>
       <y>109</y>
       <width>101</width>
       <height>91</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(61, 187, 255)</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>날씨 이미지</string>
@@ -102,7 +102,7 @@
    <widget class="QLabel" name="temper_label">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>150</x>
       <y>109</y>
       <width>171</width>
       <height>91</height>
